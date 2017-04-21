@@ -208,7 +208,14 @@ try
         $slnFolder = $(Get-ItemProperty -Path $fileToPackage -Name 'DirectoryName').DirectoryName
         #Setup Nuget
 
-        $argsPack = "pack `"$fileToPackage`" -OutputDirectory `"$outputdir`""
+        if ($outputdir)
+        {
+            $argsPack = "pack `"$fileToPackage`" -OutputDirectory `"$outputdir`""
+        }
+        else
+        {
+            $argsPack = "pack `"$fileToPackage`" -OutputDirectory `"$slnFolder`""
+        }
         
         if ($allBuildProps)
         {
